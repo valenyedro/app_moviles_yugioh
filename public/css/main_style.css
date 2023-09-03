@@ -1,0 +1,92 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.main-section{
+    background-color:var(--white-solido);
+    padding-bottom: 80px;
+}
+
+.prod-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(304px, 1fr));
+    justify-items: center;
+    row-gap: 3em;
+    column-gap: 5vw;
+    margin-left: 20.4vw;
+    margin-right: 20.4vw;
+    margin-top: 4.5em;
+}
+
+.prod-container .card{
+    position: relative;
+    display: grid;
+    justify-items: center;
+    border-radius: 0.625em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+.foto-card{
+    height: 21em;
+    transition: all 0.3s ease;
+}
+.nombre-card{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+}
+.descrip-card{
+    font-family: 'Montserrat', sans-serif;
+    text-align: justify;
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 220px;
+}
+.precio-card{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card-cart{
+    position: absolute;
+    right: 7px;
+    bottom: 4px;
+    background: url("../assets/img/addtocart.png") no-repeat;
+    background-size: 100%;
+    height: 2.5em;
+    width: 2.5em;
+    display:inline-block;
+    border: none;
+    cursor: pointer;
+    margin-left: 4px;
+    justify-self: end;
+    transition: all 0.1s ease;
+}
+.card-cart:active{
+    transform: scale(1.1);
+}
+.producto-link{
+    text-decoration: none;
+    color: #000;
+}
+.prod-container .card .foto-card:hover{
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 1153px) {
+    .prod-container{
+        margin: 0;
+    }
+}
