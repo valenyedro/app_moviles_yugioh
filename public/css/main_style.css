@@ -46,7 +46,7 @@ body {
 }
 .descrip-card{
     font-family: 'Montserrat', sans-serif;
-    text-align: justify;
+    text-align: center;
     font-size: 13px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -85,8 +85,8 @@ body {
     transform: scale(1.01);
 }
 
-@media screen and (max-width: 1153px) {
+@media screen and (max-width: 768px) {
     .prod-container{
-        margin: 0;
+        margin: 2em 0em 0em 0em;
     }
 }

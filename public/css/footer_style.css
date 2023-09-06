@@ -12,7 +12,7 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    background: url('https://i.imgur.com/hRzHU8o.png');
+    background: url('../assets/img/footer.png');
 }
 
 .logo--footer{
@@ -86,23 +86,15 @@
     font-weight: 300;
 }
 
-@media screen and (max-width: 1153px) {
+@media screen and (max-width: 768px) {
     .upper--footer{
         display: flex;
         flex-direction: column;
     }
-    .instagram--footer, .nosotros--footer{
+    .about--footer{
         padding: 0;
-        margin: 10px 0 10px;
     }
-    .nosotros--footer{
+    .learnmore--footer{
         padding: 0;
-        margin: 40px 0 0px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-    }
-    .instagram--footer{
-        margin: 0px 0 40px;
     }
 }

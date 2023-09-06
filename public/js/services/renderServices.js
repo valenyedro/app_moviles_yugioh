@@ -9,10 +9,11 @@ export const RenderAllProductos = (json) => {
         let number = Math.floor(Math.random()*1000)
         let _sectionProd = document.getElementById('cards_section');
         let name = json.data[number].name;
+        let descrip = json.data[number].desc.slice(0,47);
         let img = json.data[number].card_images[0].image_url;
         let price = `$${json.data[number].card_prices[0].ebay_price}`;
         let id = json.data[number].id;
-        _sectionProd.innerHTML += ProductoComponent(name, price, img, id);
+        _sectionProd.innerHTML += ProductoComponent(name, descrip, price, img, id);
     }
 }
 

@@ -2,16 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&family=PT+Sans&display=swap');
 
 :root{
-    --green-primario: #BFD4B6;
     --black-solido: #2d2c2b;
     --black-suave: #191919;
     --white-solido: #fff;
-    --turquoise: #77EED8;
-    --purple: #9EABE4;
-    --cream: #FAF7F2;
-    --gray: #aaa;
-    --red-light: #EF9A9A;
-    --green-light: #97cc97;
 }
 
 * {
@@ -24,7 +17,7 @@
 .header{
     padding-top: 1px;
     top: 0;
-    background-image: url('https://i.imgur.com/ADt30QM.png');
+    background-image: url('../assets/img/header1.png');
 }
 
 .subheader-h4 {
@@ -88,7 +81,7 @@
     align-items: center;
 }
 .button-search{
-    background: url("https://i.imgur.com/qgusorK.png") no-repeat;
+    background: url("../assets/img/search.png") no-repeat;
     background-size: 100%;
     height: 2.6em;
     width: 2.6em;
@@ -111,7 +104,7 @@
 }
 
 .button-deletesearch{
-    background: url("https://i.imgur.com/u7pi3NK.png") no-repeat;
+    background: url("../assets/img/delete.png") no-repeat;
     background-size: 100%;
     height: 1.6em;
     width: 1.6em;
@@ -146,7 +139,7 @@
     width: 115px;
 }
 .button-cart{
-    background: url("https://i.imgur.com/ccFVXLZ.png") no-repeat;
+    background: url("../assets/img/cart.png") no-repeat;
     background-size: 100%;
     background-position: center;
     height: 2.1em;
@@ -171,7 +164,7 @@
     right: 0px;
 }
 
-@media screen and (max-width: 1153px) {
+@media screen and (max-width: 768px) {
     .nav ul {
         display: flex;
         flex-direction: column;
@@ -191,5 +184,8 @@
     .nav ul li a {
         margin-top: 15px;
         margin-bottom: 15px;
+    }
+    .logo {
+        width: 50px;
     }
 }
