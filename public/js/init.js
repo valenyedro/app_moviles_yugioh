@@ -3,5 +3,4 @@ import { buttonCartEvent } from './services/eventCartService.js';
 
 window.onload = () => {
     IndexRender();
-    buttonCartEvent();
 }

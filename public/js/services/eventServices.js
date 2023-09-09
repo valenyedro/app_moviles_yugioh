@@ -1,3 +1,5 @@
+import { addToCart } from "./cartService.js";
+
 export const LinkCardsEvent = () => {
     let _sectionCards;
     _sectionCards = document.getElementById('cards_section');
@@ -40,7 +42,40 @@ export const IndexOnloadEvents = () => {
     })
     GeneralButtonsEvents();
     LinkCardsEvent();
+    buttonCartEvent();
 }
+
 export const ContactOnLoadEvents = () => {
     GeneralButtonsEvents();
+}
+
+
+export const buttonCartEvent = () => {
+    
+
+    $(document).ready(function() {
+        $('body').on('click', '.card-cart', function() {
+            
+        let $parentDiv = $(this).closest('.card');
+
+        let id = $parentDiv.attr("id");
+        let imagen = $parentDiv.find('.foto-card').attr("src");
+        let nombreCard = $parentDiv.find('.nombre-card').text();
+        let precio = $parentDiv.find('.precio-card').text();
+
+        console.log(imagen+"tt"+id+" "+nombreCard+" "+precio)
+
+        let cardItem = {
+            id : id,
+            imagen : imagen,
+            nombreCard : nombreCard,
+            precio : precio
+        }
+
+            addToCart(cardItem);
+        });
+    });
+    
+    
+    
 }
