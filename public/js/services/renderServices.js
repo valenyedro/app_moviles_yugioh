@@ -47,24 +47,50 @@ export const RenderAddCartItem = (cardItem) => {
 
      let id = cardItem.card.id;
      let img = cardItem.card.imagen;
-     let marca = "pirulo" 
      let price = cardItem.card.precio;
      let name = cardItem.card.nombre;
-     let quantity = 0;
-        document.getElementById('main_sidebar').innerHTML += CartItemComponent(id,img,name,marca,price,quantity);
+     let quantity = cardItem.cantidad;
+    document.getElementById('main_sidebar').innerHTML += CartItemComponent(id,img,name,price,quantity);
 
 }
 
 export const RenderCardSidebar = () => {
 
     let card = Array.from(getCart());
-
+    let precioTotal = 0;
     $.each(card, function (index, cardItem) {
+
+        let precio = cardItem.card.precio;
+        let cantidad = cardItem.cantidad;
+        let precioNumero = parseFloat(precio.replace('$', ''));
+
+        let precioItems = precioNumero*cantidad;
+        precioTotal += precioItems;
         RenderAddCartItem(cardItem);
     });
+    
+    $(".subtotal-sidebar").text(`Subtotal: $${precioTotal}`)
 }
 
 
+
+export const RenderCarritoPrecio = () => {
+
+    let card = Array.from(getCart());
+    let precioTotal = 0;
+    $.each(card, function (index, cardItem) {
+
+        let precio = cardItem.card.precio;
+        let cantidad = cardItem.cantidad;
+        let precioNumero = parseFloat(precio.replace('$', ''));
+
+        let precioItems = precioNumero*cantidad;
+        precioTotal += precioItems;
+    });
+    
+    $(".subtotal-sidebar").text(`Subtotal: $${precioTotal}`)
+  }
+  
 export const RenderCleanSideBar = () => {
     $(document).ready(function () {
         $('#main_sidebar .cart-item').remove();
