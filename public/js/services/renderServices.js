@@ -2,6 +2,8 @@ import { ProductoComponent } from "../components/productoComponent.js";
 import { FooterComponent } from "../components/footerComponent.js"
 import { HeaderComponent } from "../components/headerComponent.js";
 import { SidebarComponent } from "../components/sidebarComponent.js";
+import { CartItemComponent } from "../components/cartItemComponent.js";
+import { getCart } from "./cartService.js";
 
 export const RenderAllProductos = (json) => {
     document.getElementById('cards_section').innerHTML = "";
@@ -39,4 +41,33 @@ export const RenderHeader = () => {
 export const RenderSidebar = () => {
     document.getElementById('cart_sidebar').innerHTML = "";
     document.getElementById('cart_sidebar').innerHTML += SidebarComponent();
+}
+
+export const RenderAddCartItem = (cardItem) => {
+
+     let id = cardItem.card.id;
+     let img = cardItem.card.imagen;
+     let marca = "pirulo" 
+     let price = cardItem.card.precio;
+     let name = cardItem.card.nombre;
+     let quantity = 0;
+        document.getElementById('main_sidebar').innerHTML += CartItemComponent(id,img,name,marca,price,quantity);
+
+}
+
+export const RenderCardSidebar = () => {
+
+    let card = Array.from(getCart());
+
+    $.each(card, function (index, cardItem) {
+        RenderAddCartItem(cardItem);
+    });
+}
+
+
+export const RenderCleanSideBar = () => {
+    $(document).ready(function () {
+        $('#main_sidebar .cart-item').remove();
+    });
+
 }

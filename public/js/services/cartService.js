@@ -9,7 +9,16 @@ export const saveCart = (cartItemsList) => {
   
   export const addToCart = (item) => {
     let cartItemsList = getCart();
-    cartItemsList.push(item);
+
+    const existingItem = cartItemsList.find((cartItem) => cartItem.card.id === item.card.id);
+
+    if (existingItem) {
+        existingItem.cantidad += 1;
+    } else {
+        item.cantidad = 1;
+        cartItemsList.push(item);
+    }
+
     saveCart(cartItemsList);
-  }
+}
   

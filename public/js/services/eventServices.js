@@ -1,4 +1,5 @@
-import { addToCart } from "./cartService.js";
+import { addToCart, getCart } from "./cartService.js";
+import { RenderAddCartItem, RenderCardSidebar , RenderCleanSideBar } from "./renderServices.js";
 
 export const LinkCardsEvent = () => {
     let _sectionCards;
@@ -27,9 +28,11 @@ const GeneralButtonsEvents = () => {
     })
     document.getElementById('button_cart').addEventListener('click', function() {
         document.getElementById('cart_sidebar').classList.toggle('active');
+        RenderCardSidebar();
     })
     document.getElementById('exit_cart').addEventListener('click', function() {
         document.getElementById('cart_sidebar').classList.toggle('active');
+        RenderCleanSideBar();
     })
 }
 
@@ -52,7 +55,6 @@ export const ContactOnLoadEvents = () => {
 
 export const buttonCartEvent = () => {
     
-
     $(document).ready(function() {
         $('body').on('click', '.card-cart', function() {
             
@@ -63,19 +65,21 @@ export const buttonCartEvent = () => {
         let nombreCard = $parentDiv.find('.nombre-card').text();
         let precio = $parentDiv.find('.precio-card').text();
 
-        console.log(imagen+"tt"+id+" "+nombreCard+" "+precio)
+            let cardItem = {
 
-        let cardItem = {
-            id : id,
-            imagen : imagen,
-            nombreCard : nombreCard,
-            precio : precio
-        }
+                card: {
+                    id: id,
+                    imagen: imagen,
+                    nombre: nombreCard,
+                    precio: precio,
+                },
 
+                cantidad: 0
+            }
+            
             addToCart(cardItem);
+
         });
     });
-    
-    
-    
+      
 }
