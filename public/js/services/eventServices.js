@@ -1,6 +1,6 @@
 import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart } from "./cartService.js";
-import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio, RenderCleanSideBar } from "./renderServices.js";
-import { showNotification } from "./auxiliaryServices.js";
+import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
+import { showNotification , CarritoCount } from "./auxiliaryServices.js";
 
 export const LinkCardsEvent = () => {
     let _sectionCards;
@@ -34,7 +34,7 @@ const GeneralButtonsEvents = () => {
     })
     document.getElementById('exit_cart').addEventListener('click', function() {
         document.getElementById('cart_sidebar').classList.toggle('active');
-        RenderCleanSideBar();
+
     })
 }
 
@@ -57,6 +57,7 @@ export const CarritoEvents = () => {
                     localItem.quantity = parseInt(localItem.quantity) + 1;
     
                     item.innerHTML = `<b>Cantidad:</b> ${cantidad}`;
+                    RenderCarritoPrecio();
                 }
               }
         }
@@ -76,6 +77,7 @@ export const CarritoEvents = () => {
                     localItem.quantity = parseInt(localItem.quantity) - 1;
                     
                     item.innerHTML = `<b>Cantidad:</b> ${cantidad}`;
+                    RenderCarritoPrecio();
                     }
 
                 }
@@ -87,11 +89,12 @@ export const CarritoEvents = () => {
             let idProduct = item.id.substring(9, item.id.length);
             DeleteProductFromCart(idProduct);
             mainSidebar.removeChild(item);
+            RenderCarritoPrecio();
         }
         else if(e.target && e.target.classList.contains('generate-order-sidebar')){
             GenerateOrder(1, RenderOrden, () => {showNotification('Petición inválida', 'Para generar la orden, primero agregue productos a su carrito.', 'error')});
         }
-       // CarritoCount();
+       CarritoCount();
     })
 }
 
@@ -106,7 +109,7 @@ export const AddToCartEvent = () => {
                 AddProductToCart(GetParametro(), cantidad, () => (GetProductoById(GetParametro(), AddCartItem, () => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}))
                                 ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
                 document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
-                document.getElementById('generate_order_sidebar').disabled = false;
+                document.getElementById('generate_order_sidebar').disabled = false;          
             }
         })
     }
@@ -114,7 +117,7 @@ export const AddToCartEvent = () => {
 
     $(document).ready(function() {
         $('body').on('click', '.card-cart', function(e) {
-            
+        
         let $parentDiv = $(this).closest('.card');
 
         let id = $parentDiv.attr("id");
@@ -132,11 +135,12 @@ export const AddToCartEvent = () => {
                 cantidad: 0
             }
            
-            AddProductToCart(cardItem, 1,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')})
-                                        ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')};
+            AddProductToCart(cardItem, 1,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}
+                                        ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
             document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
             document.getElementById('generate_order_sidebar').disabled = false;
-            
+            RenderCardSidebar();
+            CarritoCount();
         });
     });
 
@@ -156,6 +160,7 @@ export const IndexOnloadEvents = () => {
     LinkCardsEvent();
     AddToCartEvent();
     CarritoEvents();
+    CarritoCount();
 }
 
 export const ContactOnLoadEvents = () => {

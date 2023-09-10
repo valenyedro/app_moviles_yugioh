@@ -1,3 +1,5 @@
+import { getCart } from "./cartService.js";
+
 export const GetParametro = () => {
     let urlParam = window.location.href;
     urlParam = urlParam.substring(31, urlParam.length);
@@ -5,9 +7,16 @@ export const GetParametro = () => {
 }
 
 export const CarritoCount = () => {
-    let cantidadProd = getCart().length
+    
+    let carrito = getCart();
+    let cantidadTotal = 0;
+
+    for (let i = 0; i < carrito.length; i++) {
+        cantidadTotal += carrito[i].cantidad;
+    }
+
     let spanCount = document.querySelector('.header > nav > ul > li.cart > button.button-cart > span.cart-count')
-    spanCount.innerText = cantidadProd;
+    spanCount.innerText = cantidadTotal;
 }
 
 export const showNotification = (notiTitle, notiText, notiType) => {

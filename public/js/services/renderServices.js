@@ -56,8 +56,11 @@ export const RenderAddCartItem = (cardItem) => {
 
 export const RenderCardSidebar = () => {
 
+    console.log("render side")
     let card = Array.from(getCart());
     let precioTotal = 0;
+
+    $("#main_sidebar").empty();
     $.each(card, function (index, cardItem) {
 
         let precio = cardItem.card.precio;
@@ -78,6 +81,8 @@ export const RenderCarritoPrecio = () => {
 
     let card = Array.from(getCart());
     let precioTotal = 0;
+
+    
     $.each(card, function (index, cardItem) {
 
         let precio = cardItem.card.precio;
@@ -90,10 +95,3 @@ export const RenderCarritoPrecio = () => {
     
     $(".subtotal-sidebar").text(`Subtotal: $${precioTotal}`)
   }
-  
-export const RenderCleanSideBar = () => {
-    $(document).ready(function () {
-        $('#main_sidebar .cart-item').remove();
-    });
-
-}

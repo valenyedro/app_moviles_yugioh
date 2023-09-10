@@ -57,7 +57,6 @@
 .notification {
   position: absolute;
   opacity: 0;
-
   color: var(--black-solido);
   font-weight: 400;
   padding: 12px;

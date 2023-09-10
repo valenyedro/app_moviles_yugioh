@@ -35,7 +35,7 @@ console.log("modifi")
 }
 
 export const DeleteProductFromCart = (idProduct) => {
-  
+
   let cartItemsList = getCart();
   cartItemsList = cartItemsList.filter((cartItem) => cartItem.card.id !== idProduct);
 
@@ -44,10 +44,22 @@ export const DeleteProductFromCart = (idProduct) => {
 
 
 export const AddProductToCart = (product, cantidad, callback, errorCallback) => {
-  
-  addToCart(product,cantidad)
 
+  let cartItemsList = getCart();
+  const existingItem = cartItemsList.find((cartItem) => cartItem.card.id ===  product.card.id);
+
+  if(location.href === "http://localhost:3000/"){
+
+  if(existingItem){
+      errorCallback();
+  }else{
     callback();
-  
-
+    addToCart(product, cantidad)
+  }
+    
+  }else{
+    callback();
+    addToCart(product, cantidad)
+  }
+      
 }
