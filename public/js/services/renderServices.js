@@ -4,6 +4,8 @@ import { HeaderComponent } from "../components/headerComponent.js";
 import { SidebarComponent } from "../components/sidebarComponent.js";
 import { FilterComponent } from "../components/filterComponent.js";
 import { MonsterDetailComponent, TrapMagicComponent } from "../components/productDetailComponent.js";
+import { CartItemComponent } from "../components/cartItemComponent.js";
+import { getCart } from "./cartService.js";
 
 export const RenderAllProductos = (json) => {
     document.getElementById('cards_section').innerHTML = "";
@@ -98,3 +100,50 @@ export const RenderSidebar = () => {
     document.getElementById('cart_sidebar').innerHTML = "";
     document.getElementById('cart_sidebar').innerHTML += SidebarComponent();
 }
+
+export const RenderAddCartItem = (cardItem) => {
+
+     let id = cardItem.card.id;
+     let img = cardItem.card.imagen;
+     let price = cardItem.card.precio;
+     let name = cardItem.card.nombre;
+     let quantity = cardItem.cantidad;
+    document.getElementById('main_sidebar').innerHTML += CartItemComponent(id,img,name,price,quantity);
+
+}
+
+export const RenderCardSidebar = () => {
+
+    console.log("render side")
+    let card = Array.from(getCart());
+
+    $("#main_sidebar").empty();
+    $.each(card, function (index, cardItem) {
+
+        RenderAddCartItem(cardItem);
+    });
+    
+    RenderCarritoPrecio();
+}
+
+
+
+export const RenderCarritoPrecio = () => {
+
+    let card = Array.from(getCart());
+    let precioTotal = 0;
+
+    
+    $.each(card, function (index, cardItem) {
+
+        let precio = cardItem.card.precio;
+        let cantidad = cardItem.cantidad;
+        let precioNumero = parseFloat(precio.replace('$', ''));
+
+        let precioItems = precioNumero*cantidad;
+        precioTotal += precioItems;
+    });
+    
+    let precioFinal = precioTotal.toFixed(2);
+    $(".subtotal-sidebar").text(`Subtotal: $${precioFinal}`)
+  }

@@ -3,6 +3,10 @@ import { ProductsSearchError } from "./errorServices.js";
 import { GetProductosFiltrados } from "./fetchServices.js";
 import { RenderAllProductos } from "./renderServices.js";
 
+import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart } from "./cartService.js";
+import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
+import { showNotification , CarritoCount } from "./auxiliaryServices.js";
+
 export const LinkCardsEvent = () => {
     let _sectionCards;
     if(location.href === 'http://localhost:3000/')
@@ -47,10 +51,123 @@ const GeneralButtonsEvents = () => {
     })
     document.getElementById('button_cart').addEventListener('click', function() {
         document.getElementById('cart_sidebar').classList.toggle('active');
+        RenderCardSidebar();
+
     })
     document.getElementById('exit_cart').addEventListener('click', function() {
         document.getElementById('cart_sidebar').classList.toggle('active');
+
     })
+}
+
+export const CarritoEvents = () => {
+    let cartItemsList = getCart();
+    document.getElementById('cart_sidebar').addEventListener('click', function(e) {
+
+        if(e.target && e.target.classList.contains('sumar-producto')){
+            let listProduct = e.target.parentNode.parentNode;
+            for (let i = 0; i < listProduct.children.length; i++) {
+                if(listProduct.children[i].classList.contains('cantidad--li')){
+                    let item = listProduct.children[i].firstChild;
+                    let idProducto = listProduct.parentNode.id.substring(9);
+                    let cantidad = parseInt(item.innerText.substring(10, item.innerText.length)) + 1;
+
+                    ModifyProductQuantity(idProducto, cantidad);
+                    
+                    cartItemsList = getCart();
+                    let localItem = cartItemsList.find(e => e.card.id === idProducto);
+                    localItem.quantity = parseInt(localItem.quantity) + 1;
+    
+                    item.innerHTML = `<b>Cantidad:</b> ${cantidad}`;
+                    RenderCarritoPrecio();
+                }
+              }
+        }
+        else if(e.target && e.target.classList.contains('restar-producto')){
+            let listProduct = e.target.parentNode.parentNode;
+            for (let i = 0; i < listProduct.children.length; i++) {
+                if(listProduct.children[i].classList.contains('cantidad--li')){
+                    let item = listProduct.children[i].firstChild;
+                    let idProducto = listProduct.parentNode.id.substring(9);
+                    let cantidad = parseInt(item.innerText.substring(10, item.innerText.length)) - 1;
+                    if(cantidad >= 1){
+
+                    ModifyProductQuantity(idProducto, cantidad);
+                        
+                    cartItemsList = getCart();
+                    let localItem = cartItemsList.find(e => e.card.id === idProducto);
+                    localItem.quantity = parseInt(localItem.quantity) - 1;
+                    
+                    item.innerHTML = `<b>Cantidad:</b> ${cantidad}`;
+                    RenderCarritoPrecio();
+                    }
+
+                }
+              }
+        }
+        else if(e.target && e.target.classList.contains('delete-producto')){
+            let mainSidebar = e.target.parentNode.parentNode.parentNode.parentNode;
+            let item = e.target.parentNode.parentNode.parentNode;
+            let idProduct = item.id.substring(9, item.id.length);
+            DeleteProductFromCart(idProduct);
+            mainSidebar.removeChild(item);
+            RenderCarritoPrecio();
+        }
+        else if(e.target && e.target.classList.contains('generate-order-sidebar')){
+            GenerateOrder(1, RenderOrden, () => {showNotification('Petición inválida', 'Para generar la orden, primero agregue productos a su carrito.', 'error')});
+        }
+       CarritoCount();
+    })
+}
+
+export const AddToCartEvent = () => {
+
+    if(location.href.includes('http://localhost:3000/producto/')){
+        
+        document.getElementById('main_product_section').addEventListener('click', function(e) {
+            if(e.target && e.target.classList.contains('add-to-cart')){
+                
+                let cantidad = document.getElementById('quantity').value;
+                AddProductToCart(GetParametro(), cantidad, () => (GetProductoById(GetParametro(), AddCartItem, () => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}))
+                                ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
+                document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
+                document.getElementById('generate_order_sidebar').disabled = false;          
+            }
+        })
+    }
+    else if(location.href === 'http://localhost:3000/'){
+
+    $(document).ready(function() {
+        $('body').on('click', '.card-cart', function(e) {
+        
+        let $parentDiv = $(this).closest('.card');
+
+        let id = $parentDiv.attr("id");
+        let imagen = $parentDiv.find('.foto-card').attr("src");
+        let nombreCard = $parentDiv.find('.nombre-card').text();
+        let precio = $parentDiv.find('.precio-card').text();
+
+        let cardItem = {
+            card: {
+                id: id,
+                imagen: imagen,
+                nombre: nombreCard,
+                precio: precio,
+            },
+                cantidad: 0
+            }
+           
+            AddProductToCart(cardItem, 1,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}
+                                        ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
+            document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
+            document.getElementById('generate_order_sidebar').disabled = false;
+            RenderCardSidebar();
+            CarritoCount();
+        });
+    });
+
+   
+ }
 }
 
 export const IndexOnloadEvents = () => {
@@ -59,20 +176,15 @@ export const IndexOnloadEvents = () => {
             top: 300, 
             behavior: "smooth"
         });
-        document.getElementById('apply_filters').click();
-    })
-    document.getElementById('clean_filters').addEventListener('click', function() {
-        document.getElementById('type_input').value = '';
-        document.getElementById('atk_input').value = '';
-        document.getElementById('atk_input_filter').value = 'desde';
-        document.getElementById('def_input').value = '';
-        document.getElementById('def_input_filter').value = 'desde';
-        document.getElementById('level_input').value = '';
     })
     GeneralButtonsEvents();
     LinkCardsEvent();
     ApplyFiltersEvent();
+    AddToCartEvent();
+    CarritoEvents();
+    CarritoCount();
 }
+
 export const ContactOnLoadEvents = () => {
     GeneralButtonsEvents();
 }
