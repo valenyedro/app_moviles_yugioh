@@ -1,0 +1,188 @@
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.main-prod-section{
+    min-height: 600px;
+}
+.main-product{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin: 100px 0px 90px 450px;
+}
+.main-product--list{
+    list-style: none;
+    padding-left: 80px;
+    line-height: 40px;
+}
+.main-product--title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+}
+.main-product--price{
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.main-product--descrip{
+    max-width: 600px;
+    text-align: justify;  
+    padding-bottom: 5px;
+    text-shadow: 4px 4px 80px;  
+}
+.main-product--additional{
+    max-width: 400px;
+}
+.quantity-div{
+    display: flex;
+    align-items: center;
+}
+.main-product--quantity{
+    padding-right: 10px;
+}
+.quantity{
+    font-weight: 500;
+    text-align: center;
+    outline: 1px solid #717171;
+    height: 30px;
+    border-radius: 10%;
+    border: 1px solid var(--gray);
+    caret-color: transparent;
+}
+.quantity::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 30px;
+    opacity: 1;
+    background: transparent;
+    border-width: 0px;
+}
+.quantity-div div{
+    height: 45px;
+    width: 100px;
+    margin-left: 40px;
+    padding-bottom: 60px;
+}
+.add-to-cart{
+    border-radius: 10%;
+    height: 50px;
+    width: 100px;
+    border: 1px solid var(--black-solido);
+    background: var(--black-suave);
+    color: var(--white-solido);
+    font-weight: 600;
+    cursor: pointer;
+}
+.add-to-cart:active{
+    transform: translate(0.5%, 3%);
+}
+.zoom-area{
+    width: 342.83px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 30%);
+    cursor: crosshair;
+}
+.main-product--img{
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.error-div{
+    padding-top: 5em;
+}
+
+.related-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(304px, 1fr));
+    justify-items: center;
+    row-gap: 2em;
+    column-gap: 5vw;
+    margin: 0px 20.4vw 80px 20.4vw;
+}
+.related-section .card{
+    position: relative;
+    display: grid;
+    justify-items: center;
+    border-radius: 0.625em;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+.foto-card{
+    height: 21em;
+    transition: all 0.3s ease;
+}
+.nombre-card{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+}
+.descrip-card{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 220px;
+}
+.precio-card{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.related-h4{
+    grid-column: 1/4;
+    justify-self: start;
+    font-size: 24px;
+}
+.card-cart{
+    display: none;
+}
+.producto-link{
+    text-decoration: none;
+    color: var(--black-solido);
+}
+.related-section .card .foto-card:hover{
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 1153px) {
+    .main-product{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        margin: 80px 0px 80px 0px;
+    }
+    .zoom-area{
+        margin-bottom: 40px;
+    }
+    .related-section{
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+    }
+    .main-product--descrip{
+        max-width: 600px;
+        text-align: justify;  
+        padding-bottom: 5px;
+        text-shadow: 4px 4px 80px;
+        padding-right: 80px;  
+    }
+}
