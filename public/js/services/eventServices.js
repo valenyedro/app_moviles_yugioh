@@ -176,6 +176,15 @@ export const IndexOnloadEvents = () => {
             top: 300, 
             behavior: "smooth"
         });
+        document.getElementById('apply_filters').click();
+    })
+    document.getElementById('clean_filters').addEventListener('click', function() {
+        document.getElementById('type_input').value = '';
+        document.getElementById('atk_input').value = '';
+        document.getElementById('atk_input_filter').value = 'desde';
+        document.getElementById('def_input').value = '';
+        document.getElementById('def_input_filter').value = 'desde';
+        document.getElementById('level_input').value = '';
     })
     GeneralButtonsEvents();
     LinkCardsEvent();
