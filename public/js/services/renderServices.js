@@ -58,21 +58,14 @@ export const RenderCardSidebar = () => {
 
     console.log("render side")
     let card = Array.from(getCart());
-    let precioTotal = 0;
 
     $("#main_sidebar").empty();
     $.each(card, function (index, cardItem) {
 
-        let precio = cardItem.card.precio;
-        let cantidad = cardItem.cantidad;
-        let precioNumero = parseFloat(precio.replace('$', ''));
-
-        let precioItems = precioNumero*cantidad;
-        precioTotal += precioItems;
         RenderAddCartItem(cardItem);
     });
     
-    $(".subtotal-sidebar").text(`Subtotal: $${precioTotal}`)
+    RenderCarritoPrecio();
 }
 
 
@@ -93,5 +86,6 @@ export const RenderCarritoPrecio = () => {
         precioTotal += precioItems;
     });
     
-    $(".subtotal-sidebar").text(`Subtotal: $${precioTotal}`)
+    let precioFinal = precioTotal.toFixed(2);
+    $(".subtotal-sidebar").text(`Subtotal: $${precioFinal}`)
   }

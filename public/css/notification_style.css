@@ -52,6 +52,7 @@
   z-index: 2;
   top: 82vh;
   right: 0.1vw;
+  width: 100%;
 }
 
 .notification {
