@@ -68,7 +68,7 @@ export const RenderRelatedProducts = (json) => {
     _relatedSection.classList.add('related-section')
     for(let i=0; i<3; i++){
         do{
-            random = Math.floor(Math.random() * 10);
+            random = Math.floor(Math.random() * json.data.length);
         } while(alreadyRendered.includes(random))
         let name = json.data[random].name;
         let desc = json.data[random].desc.slice(0,60);

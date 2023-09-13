@@ -22,6 +22,16 @@ export const FilterComponent = () => `
                 <option value="Trap Card">Trap Card</option>
                 <option value="Tuner Monster">Tuner Monster</option>
                 <option value="Union Effect Monster">Union Effect Monster</option>
+                <option value="Fusion Monster">Fusion Monster</option>
+                <option value="Link Monster">Link Monster</option>
+                <option value="Pendulum Effect Fusion Monster">Pendulum Effect Fusion Monster</option>
+                <option value="Synchro Monster">Synchro Monster</option>
+                <option value="Synchro Pendulum Effect Monster">Synchro Pendulum Effect Monster</option>
+                <option value="Synchro Tuner Monster">Synchro Tuner Monster</option>
+                <option value="XYZ Monster">XYZ Monster</option>
+                <option value="XYZ Pendulum Effect Monster">XYZ Pendulum Effect Monster</option>
+                <option value="Skill Card">Skill Card</option>
+                <option value="Token">Token</option>
             </select>
         </div>
         <label for="type_input" class="label-filter-texto" id="label_filter_texto">Tipo:</label>
