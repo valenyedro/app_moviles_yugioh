@@ -7,27 +7,31 @@ export const saveCart = (cartItemsList) => {
     return cartItemsList;
   }
   
-  export const addToCart = (item,cantidad) => {
-    let cartItemsList = getCart();
+export const addToCart = (item, cantidad) => {
+  let cartItemsList = getCart();
 
-    const existingItem = cartItemsList.find((cartItem) => cartItem.card.id === item.card.id);
+  const existingItem = cartItemsList.find((cartItem) => cartItem.card.id === item.card.id);
 
-    if (existingItem) {
-        existingItem.cantidad += 1;
-    } else {
-        item.cantidad = 1;
-        cartItemsList.push(item);
+  if (!existingItem) {
+    cartItemsList.push(item);
+  } else {
+
+    if (cantidad) { existingItem.cantidad = existingItem.cantidad + cantidad } 
+    else {
+      existingItem.cantidad++;
     }
 
-    saveCart(cartItemsList);
+  }
+
+  saveCart(cartItemsList);
 }
 
 export const ModifyProductQuantity = (idProduct,cantidad) =>{
-console.log("modifi")
+
   let cartItemsList = getCart();
   
   const existingItem = cartItemsList.find((cartItem) => cartItem.card.id ===  idProduct);
-  console.log(existingItem+"zzz ID"+idProduct)
+
   existingItem.cantidad = cantidad;
   
   saveCart(cartItemsList);
@@ -48,7 +52,7 @@ export const AddProductToCart = (product, cantidad, callback, errorCallback) => 
   let cartItemsList = getCart();
   const existingItem = cartItemsList.find((cartItem) => cartItem.card.id ===  product.card.id);
 
-  if(location.href === "http://localhost:3000/"){
+  if(true){
 
   if(existingItem){
       errorCallback();
@@ -62,4 +66,12 @@ export const AddProductToCart = (product, cantidad, callback, errorCallback) => 
     addToCart(product, cantidad)
   }
       
+}
+
+export const GetProductoById = (idProduct) => {
+
+  let cartItemsList = getCart();
+  
+  const existingItem = cartItemsList.find((cartItem) => cartItem.card.id ===  idProduct);
+  return existingItem;
 }

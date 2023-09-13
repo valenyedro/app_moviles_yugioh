@@ -3,7 +3,7 @@ import { ProductsSearchError } from "./errorServices.js";
 import { GetProductosFiltrados } from "./fetchServices.js";
 import { RenderAllProductos } from "./renderServices.js";
 
-import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart } from "./cartService.js";
+import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart, GetProductoById } from "./cartService.js";
 import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
 import { showNotification , CarritoCount } from "./auxiliaryServices.js";
 
@@ -124,16 +124,38 @@ export const AddToCartEvent = () => {
 
     if(location.href.includes('http://localhost:3000/producto/')){
         
-        document.getElementById('main_product_section').addEventListener('click', function(e) {
-            if(e.target && e.target.classList.contains('add-to-cart')){
-                
-                let cantidad = document.getElementById('quantity').value;
-                AddProductToCart(GetParametro(), cantidad, () => (GetProductoById(GetParametro(), AddCartItem, () => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}))
-                                ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
-                document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
-                document.getElementById('generate_order_sidebar').disabled = false;          
-            }
+    $(document).ready(function() {
+
+        $('body').on('click', '#add_to_cart', 
+        function(e) {
+        
+            let $parentDiv = $(this).closest('.main-product');
+
+            let id = $parentDiv.attr("id").replace("mainproduct_", "card_");
+            let imagen = $parentDiv.find('.main-product--img').attr("src");
+            let nombreCard = $parentDiv.find('.main-product--title').text();
+            let precio = $parentDiv.find('.main-product--price').text();
+            let quantity =  parseInt($parentDiv.find('.quantity').val(),10);
+
+            let cardItem = {
+                card: {
+                    id: id,
+                    imagen: imagen,
+                    nombre: nombreCard,
+                    precio: precio,
+                },
+                    cantidad: quantity
+                }
+            
+                AddProductToCart(cardItem, quantity,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}
+                                        ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
+            RenderCardSidebar();
+            CarritoCount();
+
+            $parentDiv.find('.quantity').val(GetProductoById(id).cantidad);
+            
         })
+    })
     }
     else if(location.href === 'http://localhost:3000/'){
 
@@ -154,7 +176,7 @@ export const AddToCartEvent = () => {
                 nombre: nombreCard,
                 precio: precio,
             },
-                cantidad: 0
+                cantidad: 1
             }
            
             AddProductToCart(cardItem, 1,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}
@@ -206,6 +228,9 @@ export const ProductoOnloadEvents = () => {
     GeneralButtonsEvents();
     ProductZoomEvent();
     LinkCardsEvent();
+    AddToCartEvent();
+    CarritoEvents();
+    CarritoCount();
 }
 
 export const ProductZoomEvent = () => {
@@ -232,3 +257,4 @@ export const ProductZoomEvent = () => {
         }
     })
 } 
+
