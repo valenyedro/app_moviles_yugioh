@@ -41,6 +41,7 @@
 .bottom-sidebar{
     position:absolute;
     bottom: 0;
+    background-color: #fff;
     width: 100%;
     text-align: center;
     padding-bottom: 20px;
