@@ -153,3 +153,10 @@
     padding: 8px 10px 8px 10px;
     margin: 1px;
 }
+
+@media screen and (max-width: 480px) {
+    #cart_sidebar{
+        width: 400px;
+        right: -400px;
+    }
+}

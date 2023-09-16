@@ -2,7 +2,7 @@ export const HeaderComponent = () => `
     <nav class="nav"> 
     <ul>
         <li class="cards"><a href="http://localhost:3000/" target="">Cartas</a></li>
-        <li class="historial-header"><a href="http://localhost:3000/">Historial</a></li>
+        <li class="historial-header"><a href="http://localhost:3000/historial">Historial</a></li>
         <li class="logo-li"><a href="http://localhost:3000/"><img src="../../assets/img/yugiohlogo.png" alt="Yu-Gi-Oh" class="logo"></a></li>
         <li class="contact"><a href="http://localhost:3000/contacto">Contacto</a></li>
         <li class="search">

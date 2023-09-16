@@ -14,6 +14,9 @@ router.get('/',function(req,res){
 router.get('/producto/:id',function(req,res){
   res.sendFile(path.join(__dirname+"/public/view/producto.html"));
 })
+router.get('/historial',function(req,res){
+  res.sendFile(path.join(__dirname+"/public/view/historial.html"));
+})
 router.get('/contacto',function(req,res){
   res.sendFile(path.join(__dirname+"/public/view/contacto.html"));
 })

@@ -155,9 +155,16 @@
     user-select: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 0px) and (max-width: 480px) {
     .filter-div{
-        margin-left: 14em;
+        margin-left: 5em;
+        padding-top: 3em;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+    .filter-div{
+        margin-left: 13.5em;
         padding-top: 3em;
     }
 }

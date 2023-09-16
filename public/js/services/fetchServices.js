@@ -81,3 +81,21 @@ export const GetProductosFiltrados = (name, type, atk, atkFilter, def, defFilter
             callback(body);
     })
 }
+
+export const GetProductosByName = (names, callback, errorCallback) => {
+    let UrlFinal = '/cardinfo.php?name=';
+    for(let i=0; i<names.length; i++){
+        UrlFinal += `${names[i]}|`
+    }
+    fetch(`${UrlBase}${UrlFinal}`)
+    .then((httpResponse) => {
+        if (httpResponse.ok)
+            return httpResponse.json()
+    })
+    .then((body) => {
+        if (body === undefined)
+            errorCallback();
+        else
+            callback(body);
+    })
+}

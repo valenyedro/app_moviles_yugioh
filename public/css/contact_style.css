@@ -24,6 +24,14 @@ section {
    list-style: none;
 }
 
+.contacto-data{
+    margin-right: 6em;
+}
+
+.form-info{
+    margin-left: 6em;
+}
+
 ul li {
     margin: 0.5%;
     display: flex; 
@@ -90,7 +98,45 @@ form button:hover{
     font-size: 12px;
 }
 
-@media screen and (max-width: 768px) {
+.textarea-container {
+    position: relative;
+}
+
+#mail_mensaje {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+
+.character-count {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #999;
+    font-size: 12px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 480px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 10px 0px 10px;
+    }
+    .contacto-data{
+        margin: 1em 0em 0em 0em;
+    }
+    
+    .form-info{
+        margin: 1em 0em 0em 0em;
+    }
+    
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
     .container {
         display: flex;
         flex-direction: column;
