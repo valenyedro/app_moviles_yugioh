@@ -14,20 +14,15 @@ export const SendToMail = () => {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         const nombreRegex = /^[a-zA-Z]+$/;
 
-        if (!emailRegex.test(mail)) {
-            
-            showNotification('Error','Por favor, ingresa una dirección de correo electrónico válida.','error')
-            return;
-        }
-    
         if (!nombreRegex.test(nombre)) {
             showNotification('Error','Por favor, ingresa un nombre valido.','error')
             return; 
         }
 
-        if(message == '' || message.trim().length < 20){
-            showNotification('Error','tu mensaje debe tener como minimo 20 caracteres','error')
-            return; 
+        if (!emailRegex.test(mail)) {
+            
+            showNotification('Error','Por favor, ingresa una dirección de correo electrónico válida.','error')
+            return;
         }
 
         if(asunto == ''|| asunto == null){
@@ -35,6 +30,14 @@ export const SendToMail = () => {
             return; 
         }
         
+    
+
+        if(message == '' || message.trim().length < 20){
+            showNotification('Error','tu mensaje debe tener como minimo 20 caracteres','error')
+            return; 
+        }
+
+
         showNotification('Enviado','tu mensaje fue enviado con exito y pronto te responderemos','success')
 
         $('#mail_name').val('');

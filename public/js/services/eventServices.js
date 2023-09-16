@@ -3,8 +3,8 @@ import { ProductsSearchError } from "./errorServices.js";
 import { GetProductosFiltrados } from "./fetchServices.js";
 import { RenderAllProductos } from "./renderServices.js";
 
-import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart, GetProductoById } from "./cartService.js";
-import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
+import { getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart, GetProductoById } from "./cartService.js";
+import { RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
 import { showNotification , CarritoCount } from "./auxiliaryServices.js";
 import { AddItemToHistorial } from "./historialServices.js";
 
@@ -30,36 +30,39 @@ export const LinkCardsEvent = () => {
 
 export const ApplyFiltersEvent = () => {
     document.getElementById('apply_filters').addEventListener('click', function() {
-        let name = document.getElementById('input_search').value;
-        let type = document.getElementById('type_input').value;
-        let atk = document.getElementById('atk_input').value;
-        let atkFilter = document.getElementById('atk_input_filter').value;
-        let def = document.getElementById('def_input').value;
-        let defFilter = document.getElementById('def_input_filter').value;
-        let level = document.getElementById('level_input').value;
+        let name = $('#input_search').val();
+        let type = $('#type_input').val();
+        let atk = $('#atk_input').val();
+        let atkFilter = $('#atk_input_filter').val();
+        let def = $('#def_input').val();
+        let defFilter = $('#def_input_filter').val();
+        let level = $('#level_input').val();
         document.getElementById('cards_section').innerHTML = ErrorComponent();
         GetProductosFiltrados(name,type,atk,atkFilter,def,defFilter,level,RenderAllProductos,ProductsSearchError);
     })
 }
 
 const GeneralButtonsEvents = () => {
-    document.getElementById('button_deletesearch').addEventListener('click', function() {
-        document.getElementById('input_search').value = '';
-    })
-    document.getElementById('input_search').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter')
-            document.getElementById('button_search').click()
-    })
-    document.getElementById('button_cart').addEventListener('click', function() {
-        document.getElementById('cart_sidebar').classList.toggle('active');
+    $('#button_deletesearch').click(function() {
+        $('#input_search').val('');
+    });
+
+    $('#input_search').keypress(function(e) {
+        if (e.key === 'Enter') {
+            $('#button_search').click();
+        }
+    });
+
+    $('#button_cart').click(function() {
+        $('#cart_sidebar').toggleClass('active');
         RenderCardSidebar();
+    });
 
-    })
-    document.getElementById('exit_cart').addEventListener('click', function() {
-        document.getElementById('cart_sidebar').classList.toggle('active');
-
-    })
+    $('#exit_cart').click(function() {
+        $('#cart_sidebar').toggleClass('active');
+    });
 }
+
 
 export const CarritoEvents = () => {
     let cartItemsList = getCart();
@@ -182,8 +185,7 @@ export const AddToCartEvent = () => {
            
             AddProductToCart(cardItem, 1,() => {showNotification('Producto agregado al carrito', 'El producto fue agregado exitosamente.', 'success')}
                                         ,() => {showNotification('Producto ya existente', 'El producto ya está en el carrito. Puedes modificar allí la cantidad.', 'error')});
-            document.getElementById('generate_order_sidebar').innerText = 'Finalizar Compra';
-            document.getElementById('generate_order_sidebar').disabled = false;
+
             RenderCardSidebar();
             CarritoCount();
         });
@@ -202,12 +204,12 @@ export const IndexOnloadEvents = () => {
         document.getElementById('apply_filters').click();
     })
     document.getElementById('clean_filters').addEventListener('click', function() {
-        document.getElementById('type_input').value = '';
-        document.getElementById('atk_input').value = '';
-        document.getElementById('atk_input_filter').value = 'desde';
-        document.getElementById('def_input').value = '';
-        document.getElementById('def_input_filter').value = 'desde';
-        document.getElementById('level_input').value = '';
+        $('#type_input').val('');
+        $('#atk_input').val('');
+        $('#atk_input_filter').val('desde');
+        $('#def_input').val('');
+        $('#def_input_filter').val('desde');
+        $('#level_input').val('');
     })
     GeneralButtonsEvents();
     LinkCardsEvent();
@@ -223,9 +225,9 @@ export const ContactOnLoadEvents = () => {
 }
 
 export const ProductoOnloadEvents = () => {
-    document.getElementById('button_search').addEventListener('click', function() {
+    $('#button_search').click(function() {
         window.location.href = 'http://localhost:3000/';
-    })
+    });
 
     GeneralButtonsEvents();
     ProductZoomEvent();
@@ -235,6 +237,7 @@ export const ProductoOnloadEvents = () => {
     CarritoCount();
     AddToHistorialEvent();
 }
+
 
 export const HistorialOnLoadEvents = () => {
     GeneralButtonsEvents();

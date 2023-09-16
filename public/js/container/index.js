@@ -1,4 +1,4 @@
-import { RenderAllProductos, RenderFooter, RenderHeader, RenderSidebar, RenderRandomProduct, RenderFilter } from "../services/renderServices.js"
+import { RenderAllProductos, RenderFooter, RenderHeader, RenderSidebar,RenderFilter } from "../services/renderServices.js"
 import { GetAllProductos, GetRandomProduct } from "../services/fetchServices.js";
 import { IndexProductsError } from "../services/errorServices.js"
 import { IndexOnloadEvents } from "../services/eventServices.js"
