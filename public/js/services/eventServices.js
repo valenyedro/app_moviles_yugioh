@@ -6,10 +6,11 @@ import { RenderAllProductos } from "./renderServices.js";
 import { addToCart, getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart } from "./cartService.js";
 import { RenderAddCartItem, RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
 import { showNotification , CarritoCount } from "./auxiliaryServices.js";
+import { AddItemToHistorial } from "./historialServices.js";
 
 export const LinkCardsEvent = () => {
     let _sectionCards;
-    if(location.href === 'http://localhost:3000/')
+    if(location.href === 'http://localhost:3000/' || location.href === 'http://localhost:3000/historial')
         _sectionCards = document.getElementById('cards_section');
     else if(location.href.includes('http://localhost:3000/producto/'))
         _sectionCards = document.querySelector('.main-prod-section')
@@ -135,7 +136,7 @@ export const AddToCartEvent = () => {
             }
         })
     }
-    else if(location.href === 'http://localhost:3000/'){
+    else if(location.href === 'http://localhost:3000/' || location.href === 'http://localhost:3000/historial'){
 
     $(document).ready(function() {
         $('body').on('click', '.card-cart', function(e) {
@@ -192,6 +193,7 @@ export const IndexOnloadEvents = () => {
     AddToCartEvent();
     CarritoEvents();
     CarritoCount();
+    AddToHistorialEvent();
 }
 
 export const ContactOnLoadEvents = () => {
@@ -205,6 +207,15 @@ export const ProductoOnloadEvents = () => {
 
     GeneralButtonsEvents();
     ProductZoomEvent();
+    LinkCardsEvent();
+    AddToHistorialEvent();
+}
+
+export const HistorialOnLoadEvents = () => {
+    GeneralButtonsEvents();
+    AddToCartEvent();
+    CarritoEvents();
+    CarritoCount();
     LinkCardsEvent();
 }
 
@@ -232,3 +243,25 @@ export const ProductZoomEvent = () => {
         }
     })
 } 
+
+export const AddToHistorialEvent = () => {
+    $(document).ready(function() {
+        $('body').on('click', '.producto-link', function(e) {
+            let $div = $(this);
+            let id = $div.find('.card').attr("id");
+            id = id.slice(5,id.length);
+            let imagen = $div.find('.foto-card').attr("src");
+            let nombreCard = $div.find('.nombre-card').text();
+            let descripCard = $div.find('.descrip-card').text();
+            let precio = $div.find('.precio-card').text();
+            let historialItem = {
+                id: id,
+                imagen: imagen,
+                nombre: nombreCard,
+                descripcion: descripCard,
+                precio: precio
+            }
+            AddItemToHistorial(historialItem);
+        });
+    });
+}

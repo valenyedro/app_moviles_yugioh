@@ -6,6 +6,8 @@ import { FilterComponent } from "../components/filterComponent.js";
 import { MonsterDetailComponent, TrapMagicComponent } from "../components/productDetailComponent.js";
 import { CartItemComponent } from "../components/cartItemComponent.js";
 import { getCart } from "./cartService.js";
+import { getHistorial } from "./historialServices.js";
+import { HistorialError } from "./errorServices.js";
 
 export const RenderAllProductos = (json) => {
     document.getElementById('cards_section').innerHTML = "";
@@ -147,3 +149,25 @@ export const RenderCarritoPrecio = () => {
     let precioFinal = precioTotal.toFixed(2);
     $(".subtotal-sidebar").text(`Subtotal: $${precioFinal}`)
   }
+
+export const RenderHistorialItem = (historialItem) => {
+    let id = historialItem.id;
+    let imagen = historialItem.imagen;
+    let nombre = historialItem.nombre;
+    let descripcion = historialItem.descripcion;
+    let precio = historialItem.precio;
+    document.getElementById('cards_section').innerHTML += ProductoComponent(nombre,descripcion,precio,imagen,id);
+}
+
+export const RenderHistorial = () => {
+    let historial = Array.from(getHistorial());
+    if(historial.length === 0){
+        HistorialError();
+    }
+    else{
+        $("#cards_section").empty();
+        $.each(historial.reverse(), function (index, historialItem) {
+            RenderHistorialItem(historialItem);
+        });
+    }
+}
