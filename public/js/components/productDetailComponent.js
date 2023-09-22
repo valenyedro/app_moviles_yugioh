@@ -15,9 +15,10 @@ export const MonsterDetailComponent = (id, img, name, descrip, price, type, race
             <li class="quantity-div">
                 <p class="main-product--quantity"><b>Cantidad:</b> </p>
                 <input type="number" class="quantity" id="quantity" value="1" min="1" max="100" maxlength="3">
-                <div>
+                <div class="btn_container">
                     <button class="add-to-cart" id="add_to_cart">Añadir al carrito</button>
-                <div>
+                    <button class="add-to-cart" id="share_btn"> <img class="share--img" src="../../assets/img/share.png"></img></button>
+                </div>
             </li> 
         </ul>
     </div>
@@ -36,9 +37,10 @@ export const TrapMagicComponent = (id, img, name, descrip, price, type, race) =>
             <li class="quantity-div">
                 <p class="main-product--quantity"><b>Cantidad:</b> </p>
                 <input type="number" class="quantity" id="quantity" value="1" min="1" max="100" maxlength="3">
-                <div>
-                    <button class="add-to-cart" id="add_to_cart">Añadir al carrito</button>
-                <div>
+                <div class="btn_container">
+                <button class="add-to-cart" id="add_to_cart">Añadir al carrito</button>
+                <button class="add-to-cart" id="share_btn"> <img class="share--img" src="../../assets/img/share.png"></img></button>
+            </div>
             </li> 
         </ul>
     </div>

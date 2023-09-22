@@ -97,6 +97,17 @@ body {
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
+
+.share--img{
+    width: 30px;
+}
+
+.btn_container{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 10px;
+}
+
 .error-div{
     padding-top: 5em;
 }

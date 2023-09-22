@@ -7,6 +7,7 @@ import { getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromC
 import { RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
 import { showNotification , CarritoCount } from "./auxiliaryServices.js";
 import { AddItemToHistorial } from "./historialServices.js";
+import {saveShareContent} from "./shareService.js";
 
 export const LinkCardsEvent = () => {
     let _sectionCards;
@@ -236,6 +237,7 @@ export const ProductoOnloadEvents = () => {
     CarritoEvents();
     CarritoCount();
     AddToHistorialEvent();
+    ShareButtonEvent();
 }
 
 
@@ -292,5 +294,23 @@ export const AddToHistorialEvent = () => {
             AddItemToHistorial(historialItem);
         });
     });
+}
+
+export const ShareButtonEvent = () => {
+    $(document).ready(function(){
+        $('body').on('click','#share_btn',function(e){
+            
+            let $parentDiv = $(this).closest('.main-product');
+
+            let id = $parentDiv.attr("id").replace("mainproduct_", "card_");
+            let imagen = $parentDiv.find('.main-product--img').attr("src");
+            let nombreCard = $parentDiv.find('.main-product--title').text();
+            let precio = $parentDiv.find('.main-product--price').text();
+
+            saveShareContent({id : id , imagen : imagen , nombre : nombreCard , precio : precio})
+
+            location.href = "/share";
+        })
+    })
 }
 

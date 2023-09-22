@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/header_style.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer_style.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar_style.css">
+        <link rel="stylesheet" type="text/css" href="../css/error_style.css">
+        <link rel="stylesheet" type="text/css" href="../css/contact_style.css">
+        <link rel="stylesheet" href="../css/notification_style.css">
+        <link rel="icon" href="../assets/img/yugiohlogo.png">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <title>Yu Gi Oh! | compartir</title>
+    </head>
+<body>
+    
+    <header class="header" id="header"></header>
+
+    <div class="notification-container">
+        
+    </div>
+
+    <div class="cart-sidebar" id="cart_sidebar">
+
+    </div>
+
+    <main class="main-form">
+        
+        <form class="form_share"  novalidate>
+            <h2>Compartir una carta..</h2>
+
+            <label for="email">Correo  (Emisor):</label>
+            <input type="email" id="mail_emisor" name="email">
+
+            <label for="email">Correo  (destinatario):</label>
+            <input type="email" id="mail_mail" name="email">
+
+            <label for="asunto">Asunto:</label>
+            <input type="text" id="mail_asunto" name="asunto">
+
+            <label for="mensaje">Mensaje:</label>
+            
+            <div class="textarea-container">
+                <textarea id="mail_mensaje" name="mensaje" maxlength="100"></textarea>
+              </div>
+              
+
+            <button id="send_mail" >Enviar</button>
+        </form>
+
+    </main>
+
+    <footer class="footer" id="footer">
+
+    </footer>
+
+<script type="module" src="../js/container/share.js"></script>
+</body>
+</html>
