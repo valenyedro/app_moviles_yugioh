@@ -316,24 +316,6 @@ export const ShareButtonEvent = () => {
     })
 }
 
-export const ShareButtonEvent = () => {
-    $(document).ready(function(){
-        $('body').on('click','#share_btn',function(e){
-            
-            let $parentDiv = $(this).closest('.main-product');
-
-            let id = $parentDiv.attr("id").replace("mainproduct_", "card_");
-            let imagen = $parentDiv.find('.main-product--img').attr("src");
-            let nombreCard = $parentDiv.find('.main-product--title').text();
-            let precio = $parentDiv.find('.main-product--price').text();
-
-            saveShareContent({id : id , imagen : imagen , nombre : nombreCard , precio : precio})
-
-            location.href = "/share";
-        })
-    })
-}
-
 export const LimpiarHistorialEvent = () => {
     $('#limpiar_hist_button').click(function() {
         CleanHistorial();
