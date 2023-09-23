@@ -108,7 +108,6 @@
     align-items: center;
     cursor: pointer;
 }
-.apply-filters:hover {background-color: #000}
 
 .apply-filters:active {
   background-color: #000;

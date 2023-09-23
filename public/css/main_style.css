@@ -84,9 +84,89 @@ body {
 .prod-container .card .foto-card:hover{
     transform: scale(1.01);
 }
+.paginacion{
+    display: flex;
+    justify-content: center;
+    column-gap: 1.5em;
+    align-items: center;
+    margin-top: 2em;
+}
+.page-buttons, .limpiar-hist-button{
+    display: flex;
+    height: 25px;
+    width: 80px;
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 1px #999;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.page-buttons:active, .limpiar-hist-button:active{
+  background-color: #000;
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
+}
+.current-page{
+    font-weight: bold;
+}
+
+.limpiar-historial{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4.5em;
+}
+.limpiar-hist-button{
+    display: flex;
+    height: 40px;
+    width: 80px;
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 1px #999;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.banner-publi{
+    background: url('../assets/img/bannerpubli.png') no-repeat;
+    position: absolute;
+    height: 400px;
+    width: 150px;
+    right: 100px;
+    top: 350px;
+}
 
 @media screen and (max-width: 768px) {
     .prod-container{
         margin: 2em 0em 0em 0em;
+    }
+    .banner-publi{
+        display: none;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .banner-publi{
+        background: url('../assets/img/bannerpublitablet.png') no-repeat;
+        display: flex;
+        position: relative;
+        top: auto;
+        right: auto;
+        height: 150px;
+        width: 400px;
+    }
+    .publi-aside{
+        display: flex;
+        justify-content: center;
+        margin-top: 3em;
     }
 }

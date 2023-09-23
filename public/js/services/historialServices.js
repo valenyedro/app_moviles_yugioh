@@ -22,3 +22,9 @@ export const AddItemToHistorial = (item) => {
     if(existingItem === undefined)
         addToHistorial(item);
 }
+
+export const CleanHistorial = () => {
+    let historialItemsList = getHistorial();
+    historialItemsList = [];
+    saveHistorial(historialItemsList);
+}

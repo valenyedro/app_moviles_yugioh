@@ -171,3 +171,16 @@ export const RenderHistorial = () => {
         });
     }
 }
+
+export const RenderPage = (json) => {
+    document.getElementById('cards_section').innerHTML = "";
+    for(let i=0; i<json.data.length; i++){
+        let _sectionProd = document.getElementById('cards_section');
+        let name = json.data[i].name;
+        let descrip = json.data[i].desc.slice(0,47);
+        let img = json.data[i].card_images[0].image_url;
+        let price = `$${json.data[i].card_prices[0].ebay_price}`;
+        let id = json.data[i].id;
+        _sectionProd.innerHTML += ProductoComponent(name, descrip, price, img, id);
+    }
+}

@@ -1,12 +1,11 @@
 import { ErrorComponent } from "../components/errorComponent.js";
-import { ProductsSearchError } from "./errorServices.js";
-import { GetProductosFiltrados } from "./fetchServices.js";
-import { RenderAllProductos } from "./renderServices.js";
-
+import { HistorialError, IndexProductsError, ProductsSearchError } from "./errorServices.js";
+import { GetPage, GetProductosFiltrados } from "./fetchServices.js";
+import { RenderAllProductos, RenderPage } from "./renderServices.js";
 import { getCart , AddProductToCart , ModifyProductQuantity , DeleteProductFromCart, GetProductoById } from "./cartService.js";
 import { RenderCardSidebar , RenderCarritoPrecio } from "./renderServices.js";
 import { showNotification , CarritoCount } from "./auxiliaryServices.js";
-import { AddItemToHistorial } from "./historialServices.js";
+import { AddItemToHistorial, CleanHistorial } from "./historialServices.js";
 
 export const LinkCardsEvent = () => {
     let _sectionCards;
@@ -39,6 +38,7 @@ export const ApplyFiltersEvent = () => {
         let level = $('#level_input').val();
         document.getElementById('cards_section').innerHTML = ErrorComponent();
         GetProductosFiltrados(name,type,atk,atkFilter,def,defFilter,level,RenderAllProductos,ProductsSearchError);
+        $("#paginacion").hide();
     })
 }
 
@@ -218,6 +218,7 @@ export const IndexOnloadEvents = () => {
     CarritoEvents();
     CarritoCount();
     AddToHistorialEvent();
+    PageButtonsEvents();
 }
 
 export const ContactOnLoadEvents = () => {
@@ -245,6 +246,7 @@ export const HistorialOnLoadEvents = () => {
     CarritoEvents();
     CarritoCount();
     LinkCardsEvent();
+    LimpiarHistorialEvent();
 }
 
 export const ProductZoomEvent = () => {
@@ -294,3 +296,41 @@ export const AddToHistorialEvent = () => {
     });
 }
 
+export const LimpiarHistorialEvent = () => {
+    $('#limpiar_hist_button').click(function() {
+        CleanHistorial();
+        $('#limpiar_hist_button').prop("disabled", true);
+        HistorialError();
+    })
+}
+
+export const PageButtonsEvents = () => {
+    let currentPage = $('#current_page').text();
+    if(currentPage == 1){
+        $('#previous_page').css("background-color", "grey");
+        $("#previous_page").prop("disabled", true);
+    }
+
+    $('#next_page').click(function() {
+        let currentPage = $('#current_page').text();
+        let offset = currentPage * 12;
+        GetPage(offset,RenderPage,IndexProductsError);
+        $("html, body").animate({ scrollTop: 0 }, "normal");
+        if(currentPage !== 1){
+            $('#previous_page').css("background-color", "black");
+            $("#previous_page").prop("disabled", false);
+        }
+        $('#current_page').text(`${parseInt(currentPage) + 1}`);
+    });
+    $('#previous_page').click(function() {
+        let currentPage = $('#current_page').text();
+        let offset = (parseInt(currentPage) - 2) * 12;
+        GetPage(offset,RenderPage,IndexProductsError);
+        $("html, body").animate({ scrollTop: 0 }, "normal");
+        if(currentPage == 2){
+            $('#previous_page').css("background-color", "grey");
+            $("#previous_page").prop("disabled", true);
+        }
+        $('#current_page').text(`${parseInt(currentPage) - 1}`);
+    });
+}

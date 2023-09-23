@@ -99,3 +99,18 @@ export const GetProductosByName = (names, callback, errorCallback) => {
             callback(body);
     })
 }
+
+export const GetPage = (offset, callback, errorCallback) => {
+    let success = false;
+    fetch(`${UrlBase}/cardinfo.php?num=12&offset=${offset}`)
+    .then((httpResponse) => {
+        if (httpResponse.ok)
+            return httpResponse.json()
+    })
+    .then((body) => {
+        callback(body);
+        success = true
+    })
+    if (!success)
+        errorCallback();
+}
