@@ -1,5 +1,6 @@
 import { ErrorComponent, ProductErrorComponent } from "../components/errorComponent.js"
 
+
 export const IndexProductsError = () => {
     document.getElementById('cards_section').innerHTML = "";
     document.getElementById('cards_section').innerHTML += ErrorComponent();

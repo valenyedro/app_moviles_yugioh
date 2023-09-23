@@ -2,6 +2,7 @@ import { RenderHeader, RenderSidebar, RenderFooter} from "../services/renderServ
 import { CarritoEvents, ContactOnLoadEvents } from "../services/eventServices.js"
 import { CarritoCount } from "../services/auxiliaryServices.js";
 import { SendToMail , MessageAreaEvent} from "../services/formServices.js";
+import { StartMapService } from "../services/mapServices.js";
 
 
 export const contactoRender = () => {
@@ -13,6 +14,7 @@ export const contactoRender = () => {
     CarritoCount();
     SendToMail();
     MessageAreaEvent();
+    StartMapService();
 }
 
 

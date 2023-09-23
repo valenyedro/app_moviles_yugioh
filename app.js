@@ -20,6 +20,11 @@ router.get('/historial',function(req,res){
 router.get('/contacto',function(req,res){
   res.sendFile(path.join(__dirname+"/public/view/contacto.html"));
 })
+
+router.get('/share',function(req,res){
+  res.sendFile(path.join(__dirname+"/public/view/share.html"));
+})
+
 //add the router
 app.use(express.static(__dirname + '/public'))
 app.use('/', router);
