@@ -196,4 +196,15 @@ body {
         text-shadow: 4px 4px 80px;
         padding-right: 80px;  
     }
+    .quantity-div{
+        flex-direction: row;
+        flex-direction: column;
+        align-items: start;
+    }
+    .btn_container{
+        padding-top: 40px;
+    }
+    .quantity-div div{
+        margin-left: 0px;
+     }
 }

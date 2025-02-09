@@ -38,7 +38,7 @@
 .nav ul {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    grid-template-columns: repeat(11, 1fr);
     justify-items: center;
     align-items: center;
     margin-top: 1em;
